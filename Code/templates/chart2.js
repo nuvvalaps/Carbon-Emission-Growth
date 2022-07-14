@@ -299,7 +299,7 @@ var countries = {
 
 
 var yearData = {};
-var firstYear = 1959;
+var firstYear = 1900;
 var lastYear = 2022;
 var currentYear = firstYear;
 
