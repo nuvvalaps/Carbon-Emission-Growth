@@ -457,7 +457,7 @@ am4core.ready(function() {
   slider.marginLeft = 20;
   slider.marginRight = 35;
   slider.height = 15;
-  slider.start = 1;
+  slider.start = 0;
 
 
   // what to do when slider is dragged
@@ -610,7 +610,7 @@ am4core.ready(function() {
   // play behavior
   function play() {
     if (!sliderAnimation) {
-      sliderAnimation = slider.animate({ property: "start", to: 1, from: 0 }, 50000, am4core.ease.linear).pause();
+      sliderAnimation = slider.animate({ property: "start", to: 1, from: 0 }, 25000, am4core.ease.linear).pause();
       sliderAnimation.events.on("animationended", () => {
         playButton.isActive = false;
       })
@@ -1215,7 +1215,7 @@ am4core.ready(function() {
 
   // updates country name and date
   function updateCountryName() {
-    countryName.text = currentCountry + ", " + mapChart.dateFormatter.format(currentDate, "MMM dd, yyyy");
+    countryName.text = currentCountry + ", " + mapChart.dateFormatter.format(currentDate, "yyyy");
   }
 
   // update total values in buttons
@@ -1267,14 +1267,14 @@ am4core.ready(function() {
         image.dataItem.dataContext.confirmed = di.confirmed;
         image.dataItem.dataContext.deaths = di.deaths;
         image.dataItem.dataContext.recovered = di.recovered;
-        image.dataItem.dataContext.active = di.recovered/di.deaths*1000000000;
+        image.dataItem.dataContext.active = di.recovered/di.deaths*1000000;
       }
 
       if (polygon) {
         polygon.dataItem.dataContext.confirmedPC = di.confirmed / population * 1000000;
         polygon.dataItem.dataContext.deathsPC = di.deaths / population * 1000000;
         polygon.dataItem.dataContext.recoveredPC = di.recovered / population * 1000000;
-        polygon.dataItem.dataContext.active = di.recovered/di.deaths*1000000000;
+        polygon.dataItem.dataContext.active = di.recovered/di.deaths*1000000;
         polygon.dataItem.dataContext.activePC = polygon.dataItem.dataContext.active / population * 1000000;
 
         if (population > 100000) {
