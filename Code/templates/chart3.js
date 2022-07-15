@@ -900,7 +900,7 @@ am4core.ready(function() {
 
   // data warning label
   var label = lineChart.plotContainer.createChild(am4core.Label);
-  label.text = "Current day stats may be incomplete until countries submit their data.";
+  label.text = " ";
   label.fill = am4core.color("#ffffff");
   label.fontSize = "0.8em";
   label.paddingBottom = 4;
