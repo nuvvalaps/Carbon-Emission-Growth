@@ -67,7 +67,7 @@ am4core.ready(function() {
   // calculated active cases in world data (active = confirmed - recovered)
   for (var i = 0; i < covid_total_timeline.length; i++) {
     var di = covid_total_timeline[i];
-    di.active = di.confirmed - di.recovered;
+    di.active = di.recovered/di.deaths*1000000000;
   }
 
   // function that returns current slide
@@ -320,7 +320,7 @@ am4core.ready(function() {
   // top title
   var title = mapChart.titles.create();
   title.fontSize = "1.5em";
-  title.text = "COVID-19 Spread Data";
+  title.text = "Population, GDP, and Carbon Emissions";
   title.align = "left";
   title.horizontalCenter = "left";
   title.marginLeft = 20;
@@ -356,52 +356,52 @@ am4core.ready(function() {
   })
 
 
-  // switch between map and globe
-  var absolutePerCapitaSwitch = mapChart.createChild(am4core.SwitchButton);
-  absolutePerCapitaSwitch.align = "center"
-  absolutePerCapitaSwitch.y = 15;
-  absolutePerCapitaSwitch.leftLabel.text = "Absolute";
-  absolutePerCapitaSwitch.leftLabel.fill = am4core.color("#ffffff");
-  absolutePerCapitaSwitch.rightLabel.fill = am4core.color("#ffffff");
-  absolutePerCapitaSwitch.rightLabel.text = "Per Capita";
-  absolutePerCapitaSwitch.rightLabel.interactionsEnabled = true;
-  absolutePerCapitaSwitch.rightLabel.tooltipText = "When calculating max value, countries with population less than 100.000 are not included."
-  absolutePerCapitaSwitch.verticalCenter = "top";
+//   // switch between map and globe
+//   var absolutePerCapitaSwitch = mapChart.createChild(am4core.SwitchButton);
+//   absolutePerCapitaSwitch.align = "center"
+//   absolutePerCapitaSwitch.y = 15;
+//   absolutePerCapitaSwitch.leftLabel.text = "Absolute";
+//   absolutePerCapitaSwitch.leftLabel.fill = am4core.color("#ffffff");
+//   absolutePerCapitaSwitch.rightLabel.fill = am4core.color("#ffffff");
+//   absolutePerCapitaSwitch.rightLabel.text = "Per Capita";
+//   absolutePerCapitaSwitch.rightLabel.interactionsEnabled = true;
+//   absolutePerCapitaSwitch.rightLabel.tooltipText = "When calculating max value, countries with population less than 100.000 are not included."
+//   absolutePerCapitaSwitch.verticalCenter = "top";
 
 
-  absolutePerCapitaSwitch.events.on("toggled", function() {
-    if (absolutePerCapitaSwitch.isActive) {
-      bubbleSeries.hide(0);
-      perCapita = true;
-      bubbleSeries.interpolationDuration = 0;
-      polygonSeries.heatRules.getIndex(0).max = colors[currentType];
-      polygonSeries.heatRules.getIndex(0).maxValue = maxPC[currentType];
-      polygonSeries.mapPolygons.template.applyOnClones = true;
+//   absolutePerCapitaSwitch.events.on("toggled", function() {
+//     if (absolutePerCapitaSwitch.isActive) {
+//       bubbleSeries.hide(0);
+//       perCapita = true;
+//       bubbleSeries.interpolationDuration = 0;
+//       polygonSeries.heatRules.getIndex(0).max = colors[currentType];
+//       polygonSeries.heatRules.getIndex(0).maxValue = maxPC[currentType];
+//       polygonSeries.mapPolygons.template.applyOnClones = true;
 
-      sizeSlider.hide()
-      filterSlider.hide();
-      sizeLabel.hide();
-      filterLabel.hide();
+//       sizeSlider.hide()
+//       filterSlider.hide();
+//       sizeLabel.hide();
+//       filterLabel.hide();
 
-      updateCountryTooltip();
+//       updateCountryTooltip();
 
-    } else {
-      perCapita = false;
-      polygonSeries.interpolationDuration = 0;
-      bubbleSeries.interpolationDuration = 1000;
-      bubbleSeries.show();
-      polygonSeries.heatRules.getIndex(0).max = countryColor;
-      polygonSeries.mapPolygons.template.tooltipText = undefined;
-      sizeSlider.show()
-      filterSlider.show();
-      sizeLabel.show();
-      filterLabel.show();
-    }
-    polygonSeries.mapPolygons.each(function(mapPolygon) {
-      mapPolygon.fill = mapPolygon.fill;
-      mapPolygon.defaultState.properties.fill = undefined;
-    })
-  })
+//     } else {
+//       perCapita = false;
+//       polygonSeries.interpolationDuration = 0;
+//       bubbleSeries.interpolationDuration = 1000;
+//       bubbleSeries.show();
+//       polygonSeries.heatRules.getIndex(0).max = countryColor;
+//       polygonSeries.mapPolygons.template.tooltipText = undefined;
+//       sizeSlider.show()
+//       filterSlider.show();
+//       sizeLabel.show();
+//       filterLabel.show();
+//     }
+//     polygonSeries.mapPolygons.each(function(mapPolygon) {
+//       mapPolygon.fill = mapPolygon.fill;
+//       mapPolygon.defaultState.properties.fill = undefined;
+//     })
+//   })
 
 
   // buttons & chart container
@@ -1101,7 +1101,7 @@ am4core.ready(function() {
         dataContext.recovered = countryData.recovered;
         dataContext.confirmed = countryData.confirmed;
         dataContext.deaths = countryData.deaths;
-        dataContext.active = countryData.confirmed - countryData.recovered - countryData.deaths;
+        dataContext.active = countryData.recovered/countryData.deaths*1000000000;
         valueAxis.min = undefined;
         valueAxis.max = undefined;
       }
@@ -1202,7 +1202,7 @@ am4core.ready(function() {
       dataContext.recovered = di.recovered;
       dataContext.confirmed = di.confirmed;
       dataContext.deaths = di.deaths;
-      dataContext.active = di.confirmed - di.recovered;
+      dataContext.active = di.recovered/di.deaths*1000000000;
       valueAxis.min = undefined;
       valueAxis.max = undefined;
     }
@@ -1267,14 +1267,14 @@ am4core.ready(function() {
         image.dataItem.dataContext.confirmed = di.confirmed;
         image.dataItem.dataContext.deaths = di.deaths;
         image.dataItem.dataContext.recovered = di.recovered;
-        image.dataItem.dataContext.active = di.confirmed - di.recovered - di.deaths;
+        image.dataItem.dataContext.active = di.recovered/di.deaths*1000000000;
       }
 
       if (polygon) {
         polygon.dataItem.dataContext.confirmedPC = di.confirmed / population * 1000000;
         polygon.dataItem.dataContext.deathsPC = di.deaths / population * 1000000;
         polygon.dataItem.dataContext.recoveredPC = di.recovered / population * 1000000;
-        polygon.dataItem.dataContext.active = di.confirmed - di.recovered - di.deaths;
+        polygon.dataItem.dataContext.active = di.recovered/di.deaths*1000000000;
         polygon.dataItem.dataContext.activePC = polygon.dataItem.dataContext.active / population * 1000000;
 
         if (population > 100000) {

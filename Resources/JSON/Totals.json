@@ -3,180 +3,180 @@ var covid_total_timeline =[
     "confirmed": 1116451.57,
     "deaths": 5250650135,
     "recovered": 20344080,
-    "date": 1990
+    "date": "1990"
   },
   {
     "confirmed": 1131178.316,
     "deaths": 5338493762,
     "recovered": 20483800,
-    "date": 1991
+    "date": "1991"
   },
   {
     "confirmed": 1193393.172,
     "deaths": 5422789034,
     "recovered": 20514230,
-    "date": 1992
+    "date": "1992"
   },
   {
     "confirmed": 1159522.119,
     "deaths": 5507958107,
     "recovered": 20652420,
-    "date": 1993
+    "date": "1993"
   },
   {
     "confirmed": 1234074.541,
     "deaths": 5591960885,
     "recovered": 20766360,
-    "date": 1994
+    "date": "1994"
   },
   {
     "confirmed": 1472338.235,
     "deaths": 5676373489,
     "recovered": 21357990,
-    "date": 1995
+    "date": "1995"
   },
   {
     "confirmed": 1519760.448,
     "deaths": 5758937854,
     "recovered": 21809400,
-    "date": 1996
+    "date": "1996"
   },
   {
     "confirmed": 1493439.075,
     "deaths": 5841137580,
     "recovered": 22185570,
-    "date": 1997
+    "date": "1997"
   },
   {
     "confirmed": 1520261.996,
     "deaths": 5922461399,
     "recovered": 22305580,
-    "date": 1998
+    "date": "1998"
   },
   {
     "confirmed": 1599113.956,
     "deaths": 6002670546,
     "recovered": 22410560,
-    "date": 1999
+    "date": "1999"
   },
   {
     "confirmed": 1607892.928,
     "deaths": 6082115783,
     "recovered": 23127480,
-    "date": 2000
+    "date": "2000"
   },
   {
     "confirmed": 1606741.706,
     "deaths": 6161012993,
     "recovered": 23521840,
-    "date": 2001
+    "date": "2001"
   },
   {
     "confirmed": 1781923.058,
     "deaths": 6239684208,
     "recovered": 23837389.78,
-    "date": 2002
+    "date": "2002"
   },
   {
     "confirmed": 2050721.702,
     "deaths": 6318437741,
     "recovered": 24942190.33,
-    "date": 2003
+    "date": "2003"
   },
   {
     "confirmed": 2335464.906,
     "deaths": 6397710669,
     "recovered": 26075429.9,
-    "date": 2004
+    "date": "2004"
   },
   {
     "confirmed": 2526241.024,
     "deaths": 6477465667,
     "recovered": 27042110.05,
-    "date": 2005
+    "date": "2005"
   },
   {
     "confirmed": 2842719.726,
     "deaths": 6557935839,
     "recovered": 27918670.17,
-    "date": 2006
+    "date": "2006"
   },
   {
     "confirmed": 3238991.017,
     "deaths": 6638856238,
     "recovered": 28969919.92,
-    "date": 2007
+    "date": "2007"
   },
   {
     "confirmed": 3548880.625,
     "deaths": 6721105290,
     "recovered": 29193439.87,
-    "date": 2008
+    "date": "2008"
   },
   {
     "confirmed": 3157295.793,
     "deaths": 6803122938,
     "recovered": 28869359.99,
-    "date": 2009
+    "date": "2009"
   },
   {
     "confirmed": 3314857.105,
     "deaths": 6884933222,
     "recovered": 30621439.64,
-    "date": 2010
+    "date": "2010"
   },
   {
     "confirmed": 3625696.327,
     "deaths": 6966418863,
     "recovered": 31585749.8,
-    "date": 2011
+    "date": "2011"
   },
   {
     "confirmed": 3588010.906,
     "deaths": 7048241375,
     "recovered": 32018710.17,
-    "date": 2012
+    "date": "2012"
   },
   {
     "confirmed": 3731686.668,
     "deaths": 7134078133,
     "recovered": 32668620.53,
-    "date": 2013
+    "date": "2013"
   },
   {
     "confirmed": 3798785.826,
     "deaths": 7220108265,
     "recovered": 32746659.98,
-    "date": 2014
+    "date": "2014"
   },
   {
     "confirmed": 3417524.715,
     "deaths": 7305657814,
     "recovered": 32545509.55,
-    "date": 2015
+    "date": "2015"
   },
   {
     "confirmed": 3446610.915,
     "deaths": 7391313673,
     "recovered": 32568530.26,
-    "date": 2016
+    "date": "2016"
   },
   {
     "confirmed": 3623846.527,
     "deaths": 7476707651,
     "recovered": 33057909.82,
-    "date": 2017
+    "date": "2017"
   },
   {
     "confirmed": 3845497.505,
     "deaths": 7559776362,
     "recovered": 33822309.78,
-    "date": 2018
+    "date": "2018"
   },
   {
     "confirmed": 3784957.688,
     "deaths": 7640594998,
     "recovered": 33876089.96,
-    "date": 2019
+    "date": "2019"
   }
 ]
