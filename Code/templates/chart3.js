@@ -67,7 +67,7 @@ am4core.ready(function() {
   // calculated active cases in world data (active = GDP - Emissions)
   for (var i = 0; i < covid_total_timeline.length; i++) {
     var di = covid_total_timeline[i];
-    di.active = di.Emissions/di.Population*1000000000;
+    di.active = Math.round(di.Emissions/di.Population*1000000000);
   }
 
   // function that returns current slide
@@ -536,7 +536,7 @@ am4core.ready(function() {
   sizeLabel.tooltip.setBounds({ x: 0, y: 0, width: 200000, height: 200000 })
   sizeLabel.tooltip.label.wrap = true;
   sizeLabel.tooltip.label.maxWidth = 300;
-  sizeLabel.tooltipText = "Some countries have so many cases that bubbles for countries with smaller values often look the same even if there is a significant difference between them. This slider can be used to increase maximum size of a bubble so that when you zoom in to a region with relatively small values you could compare them anyway."
+  sizeLabel.tooltipText = ""
   sizeLabel.fill = am4core.color("#ffffff");
 
   sizeLabel.adapter.add("y", function(y, target) {
@@ -546,71 +546,71 @@ am4core.ready(function() {
   // filter slider
 
   // bubble size slider
-  var filterSlider = container.createChild(am4core.Slider);
-  filterSlider.orientation = "vertical";
-  filterSlider.height = am4core.percent(28);
-  filterSlider.marginLeft = 25;
-  filterSlider.align = "left";
-  filterSlider.valign = "top";
-  filterSlider.verticalCenter = "middle";
-  filterSlider.opacity = 0.7;
-  filterSlider.background.fill = am4core.color("#ffffff");
-  filterSlider.adapter.add("y", function(y, target) {
-    return container.pixelHeight * (1 - buttonsAndChartContainer.percentHeight / 100) * 0.7;
-  })
+  // var filterSlider = container.createChild(am4core.Slider);
+  // filterSlider.orientation = "vertical";
+  // filterSlider.height = am4core.percent(28);
+  // filterSlider.marginLeft = 25;
+  // filterSlider.align = "left";
+  // filterSlider.valign = "top";
+  // filterSlider.verticalCenter = "middle";
+  // filterSlider.opacity = 0.7;
+  // filterSlider.background.fill = am4core.color("#ffffff");
+  // filterSlider.adapter.add("y", function(y, target) {
+  //   return container.pixelHeight * (1 - buttonsAndChartContainer.percentHeight / 100) * 0.7;
+  // })
 
-  filterSlider.startGrip.background.fill = activeColor;
-  filterSlider.startGrip.background.fillOpacity = 0.8;
-  filterSlider.startGrip.background.strokeOpacity = 0;
-  filterSlider.startGrip.icon.stroke = am4core.color("#ffffff");
-  filterSlider.startGrip.background.states.getKey("hover").properties.fill = activeColor;
-  filterSlider.startGrip.background.states.getKey("down").properties.fill = activeColor;
-  filterSlider.horizontalCenter = "middle";
-  filterSlider.start = 1;
-
-
-  filterSlider.events.on("rangechanged", function() {
-    var maxValue = max[currentType] * filterSlider.start + 1;
-    if (!isNaN(maxValue) && bubbleSeries.inited) {
-      bubbleSeries.heatRules.getIndex(0).maxValue = maxValue;
-      circle.clones.each(function(clone) {
-        if (clone.dataItem.value > maxValue) {
-          clone.dataItem.hide();
-        }
-        else {
-          clone.dataItem.show();
-        }
-        clone.radius = clone.radius;
-      })
-    }
-  })
+  // filterSlider.startGrip.background.fill = activeColor;
+  // filterSlider.startGrip.background.fillOpacity = 0.8;
+  // filterSlider.startGrip.background.strokeOpacity = 0;
+  // filterSlider.startGrip.icon.stroke = am4core.color("#ffffff");
+  // filterSlider.startGrip.background.states.getKey("hover").properties.fill = activeColor;
+  // filterSlider.startGrip.background.states.getKey("down").properties.fill = activeColor;
+  // filterSlider.horizontalCenter = "middle";
+  // filterSlider.start = 1;
 
 
-  var filterLabel = container.createChild(am4core.Label);
-  filterLabel.text = "filter max values *";
-  filterLabel.rotation = 90;
-  filterLabel.fontSize = "10px";
-  filterLabel.fill = am4core.color("#ffffff");
-  filterLabel.fontSize = "0.8em";
-  filterLabel.fillOpacity = 0.5;
-  filterLabel.horizontalCenter = "middle";
-  filterLabel.align = "left"
-  filterLabel.paddingBottom = 40;
-  filterLabel.tooltip.label.wrap = true;
-  filterLabel.tooltip.label.maxWidth = 300;
-  filterLabel.tooltipText = "This filter allows to remove countries with many cases from the map so that it would be possible to compare countries with smaller number of cases."
-  filterLabel.fill = am4core.color("#ffffff");
+  // filterSlider.events.on("rangechanged", function() {
+  //   var maxValue = max[currentType] * filterSlider.start + 1;
+  //   if (!isNaN(maxValue) && bubbleSeries.inited) {
+  //     bubbleSeries.heatRules.getIndex(0).maxValue = maxValue;
+  //     circle.clones.each(function(clone) {
+  //       if (clone.dataItem.value > maxValue) {
+  //         clone.dataItem.hide();
+  //       }
+  //       else {
+  //         clone.dataItem.show();
+  //       }
+  //       clone.radius = clone.radius;
+  //     })
+  //   }
+  // })
 
-  filterLabel.adapter.add("y", function(y, target) {
-    return container.pixelHeight * (1 - buttonsAndChartContainer.percentHeight / 100) * 0.7;
-  })
+
+  // var filterLabel = container.createChild(am4core.Label);
+  // filterLabel.text = "filter max values *";
+  // filterLabel.rotation = 90;
+  // filterLabel.fontSize = "10px";
+  // filterLabel.fill = am4core.color("#ffffff");
+  // filterLabel.fontSize = "0.8em";
+  // filterLabel.fillOpacity = 0.5;
+  // filterLabel.horizontalCenter = "middle";
+  // filterLabel.align = "left"
+  // filterLabel.paddingBottom = 40;
+  // filterLabel.tooltip.label.wrap = true;
+  // filterLabel.tooltip.label.maxWidth = 300;
+  // filterLabel.tooltipText = "This filter allows to remove countries with many cases from the map so that it would be possible to compare countries with smaller number of cases."
+  // filterLabel.fill = am4core.color("#ffffff");
+
+  // filterLabel.adapter.add("y", function(y, target) {
+  //   return container.pixelHeight * (1 - buttonsAndChartContainer.percentHeight / 100) * 0.7;
+  // })
 
 
 
   // play behavior
   function play() {
     if (!sliderAnimation) {
-      sliderAnimation = slider.animate({ property: "start", to: 1, from: 0 }, 25000, am4core.ease.linear).pause();
+      sliderAnimation = slider.animate({ property: "start", to: 1, from: 0 }, 12500, am4core.ease.linear).pause();
       sliderAnimation.events.on("animationended", () => {
         playButton.isActive = false;
       })
@@ -965,10 +965,19 @@ am4core.ready(function() {
   // change data type (active/GDP/Emissions/Population)
   function changeDataType(name) {
     currentType = name;
-    currentTypeName = name;
-    if (name != "Population") {
-      currentTypeName += " cases";
+    currentTypeName = " ";
+    if (name == "Population") {
+      currentTypeName += " People";
     }
+    else if (name == "Emissions") {
+      currentTypeName += " kT of CO2";
+    }
+    else if (name == "GDP") {
+      currentTypeName += " US per capita";
+    }else {
+      currentTypeName += " kg CO2 per capita";
+    }
+    
     
 
     bubbleSeries.mapImages.template.tooltipText = "[bold]{name}: {value}[/] [font-size:10px]\n" + currentTypeName;
@@ -1102,7 +1111,7 @@ am4core.ready(function() {
         dataContext.Emissions = countryData.Emissions;
         dataContext.GDP = countryData.GDP;
         dataContext.Population = countryData.Population;
-        dataContext.active = countryData.Emissions/countryData.Population*1000000000;
+        dataContext.active = Math.round(countryData.Emissions/countryData.Population*1000000000);
         valueAxis.min = undefined;
         valueAxis.max = undefined;
       }
@@ -1203,7 +1212,7 @@ am4core.ready(function() {
       dataContext.Emissions = di.Emissions;
       dataContext.GDP = di.GDP;
       dataContext.Population = di.Population;
-      dataContext.active = di.Emissions/di.Population*1000000000;
+      dataContext.active = Math.round(di.Emissions/di.Population*1000000000);
       valueAxis.min = undefined;
       valueAxis.max = undefined;
     }
@@ -1268,7 +1277,7 @@ am4core.ready(function() {
         image.dataItem.dataContext.GDP = di.GDP;
         image.dataItem.dataContext.Population = di.Population;
         image.dataItem.dataContext.Emissions = di.Emissions;
-        image.dataItem.dataContext.active = di.Emissions/di.Population*1000000;
+        image.dataItem.dataContext.active = Math.round(di.Emissions/di.Population*1000000);
       }
 
       if (polygon) {
