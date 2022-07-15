@@ -20,12 +20,12 @@ am4core.ready(function() {
 
   var backgroundColor = am4core.color("#1e2128");
   var activeColor = am4core.color("#ff8726");
-  var confirmedColor = am4core.color("#d21a1a");
-  var recoveredColor = am4core.color("#45d21a");
-  var deathsColor = am4core.color("#1c5fe5");
+  var GDPColor = am4core.color("#d21a1a");
+  var EmissionsColor = am4core.color("#45d21a");
+  var PopulationColor = am4core.color("#1c5fe5");
 
   // for an easier access by key
-  var colors = { active: activeColor, confirmed: confirmedColor, recovered: recoveredColor, deaths: deathsColor };
+  var colors = { active: activeColor, GDP: GDPColor, Emissions: EmissionsColor, Population: PopulationColor };
 
   var countryColor = am4core.color("#3b3b3b");
   var countryStrokeColor = am4core.color("#000000");
@@ -64,10 +64,10 @@ am4core.ready(function() {
     countryIndexMap[country.id] = i;
   }
 
-  // calculated active cases in world data (active = confirmed - recovered)
+  // calculated active cases in world data (active = GDP - Emissions)
   for (var i = 0; i < covid_total_timeline.length; i++) {
     var di = covid_total_timeline[i];
-    di.active = di.recovered/di.deaths*1000000000;
+    di.active = di.Emissions/di.Population*1000000000;
   }
 
   // function that returns current slide
@@ -95,28 +95,28 @@ am4core.ready(function() {
 
   // remove items with 0 values for better performance
   for(var i = mapData.length - 1; i >= 0; i--){
-    if(mapData[i].confirmed == 0){
+    if(mapData[i].GDP == 0){
       mapData.splice(i, 1);
     }
   }
 
 
-  var max = { confirmed: 0, recovered: 0, deaths: 0 };
-  var maxPC = { confirmed: 0, recovered: 0, deaths: 0, active: 0 };
+  var max = { GDP: 0, Emissions: 0, Population: 0 };
+  var maxPC = { GDP: 0, Emissions: 0, Population: 0, active: 0 };
 
   // the last day will have most
   for (var i = 0; i < mapData.length; i++) {
     var di = mapData[i];
-    if (di.confirmed > max.confirmed) {
-      max.confirmed = di.confirmed;
+    if (di.GDP > max.GDP) {
+      max.GDP = di.GDP;
     }
-    if (di.recovered > max.recovered) {
-      max.recovered = di.recovered;
+    if (di.Emissions > max.Emissions) {
+      max.Emissions = di.Emissions;
     }
-    if (di.deaths > max.deaths) {
-      max.deaths = di.deaths
+    if (di.Population > max.Population) {
+      max.Population = di.Population
     }
-    max.active = max.confirmed;
+    max.active = max.GDP;
   }
 
   // END OF DATA
@@ -423,7 +423,7 @@ am4core.ready(function() {
   countryName.fill = am4core.color("#ffffff");
   countryName.valign = "middle";
 
-  // buttons container (active/confirmed/recovered/deaths)
+  // buttons container (active/GDP/Emissions/Population)
   var buttonsContainer = nameAndButtonsContainer.createChild(am4core.Container);
   buttonsContainer.layout = "grid";
   buttonsContainer.width = am4core.percent(100);
@@ -795,11 +795,11 @@ am4core.ready(function() {
   activeSeries.tooltip.disabled = true;
   activeSeries.hidden = false;
 
-  var confirmedSeries = addSeries("confirmed", confirmedColor);
-  var recoveredSeries = addSeries("recovered", recoveredColor);
-  var deathsSeries = addSeries("deaths", deathsColor);
+  var GDPSeries = addSeries("GDP", GDPColor);
+  var EmissionsSeries = addSeries("Emissions", EmissionsColor);
+  var PopulationSeries = addSeries("Population", PopulationColor);
 
-  var series = { active: activeSeries, confirmed: confirmedSeries, recovered: recoveredSeries, deaths: deathsSeries };
+  var series = { active: activeSeries, GDP: GDPSeries, Emissions: EmissionsSeries, Population: PopulationSeries };
   // add series
   function addSeries(name, color) {
     var series = lineChart.series.push(new am4charts.LineSeries())
@@ -845,7 +845,7 @@ am4core.ready(function() {
   }
 
 
-  var series = { active: activeSeries, confirmed: confirmedSeries, recovered: recoveredSeries, deaths: deathsSeries };
+  var series = { active: activeSeries, GDP: GDPSeries, Emissions: EmissionsSeries, Population: PopulationSeries };
 
   var columnSeries;
 
@@ -856,9 +856,9 @@ am4core.ready(function() {
       updateColumnsFill();
     })
 
-    columnSeries.confirmed = addColumnSeries("confirmed", confirmedColor);
-    columnSeries.recovered = addColumnSeries("recovered", recoveredColor);
-    columnSeries.deaths = addColumnSeries("deaths", deathsColor);
+    columnSeries.GDP = addColumnSeries("GDP", GDPColor);
+    columnSeries.Emissions = addColumnSeries("Emissions", EmissionsColor);
+    columnSeries.Population = addColumnSeries("Population", PopulationColor);
   }
 
   // add series
@@ -912,11 +912,11 @@ am4core.ready(function() {
   // BUTTONS
   // create buttons
   var activeButton = addButton("active", activeColor);
-  var confirmedButton = addButton("confirmed", confirmedColor);
-  var recoveredButton = addButton("recovered", recoveredColor);
-  var deathsButton = addButton("deaths", deathsColor);
+  var GDPButton = addButton("GDP", GDPColor);
+  var EmissionsButton = addButton("Emissions", EmissionsColor);
+  var PopulationButton = addButton("Population", PopulationColor);
 
-  var buttons = { active: activeButton, confirmed: confirmedButton, recovered: recoveredButton, deaths: deathsButton };
+  var buttons = { active: activeButton, GDP: GDPButton, Emissions: EmissionsButton, Population: PopulationButton };
 
   // add button
   function addButton(name, color) {
@@ -962,13 +962,14 @@ am4core.ready(function() {
     changeDataType(event.target.dummyData);
   }
 
-  // change data type (active/confirmed/recovered/deaths)
+  // change data type (active/GDP/Emissions/Population)
   function changeDataType(name) {
     currentType = name;
     currentTypeName = name;
-    if (name != "deaths") {
+    if (name != "Population") {
       currentTypeName += " cases";
     }
+    
 
     bubbleSeries.mapImages.template.tooltipText = "[bold]{name}: {value}[/] [font-size:10px]\n" + currentTypeName;
 
@@ -1098,17 +1099,17 @@ am4core.ready(function() {
       var countryData = di[countryIndex];
       var dataContext = lineChart.data[i];
       if (countryData) {
-        dataContext.recovered = countryData.recovered;
-        dataContext.confirmed = countryData.confirmed;
-        dataContext.deaths = countryData.deaths;
-        dataContext.active = countryData.recovered/countryData.deaths*1000000000;
+        dataContext.Emissions = countryData.Emissions;
+        dataContext.GDP = countryData.GDP;
+        dataContext.Population = countryData.Population;
+        dataContext.active = countryData.Emissions/countryData.Population*1000000000;
         valueAxis.min = undefined;
         valueAxis.max = undefined;
       }
       else {
-        dataContext.recovered = 0;
-        dataContext.confirmed = 0;
-        dataContext.deaths = 0;
+        dataContext.Emissions = 0;
+        dataContext.GDP = 0;
+        dataContext.Population = 0;
         dataContext.active = 0;
         valueAxis.min = 0;
         valueAxis.max = 10;
@@ -1199,10 +1200,10 @@ am4core.ready(function() {
       var di = covid_total_timeline[i];
       var dataContext = lineChart.data[i];
 
-      dataContext.recovered = di.recovered;
-      dataContext.confirmed = di.confirmed;
-      dataContext.deaths = di.deaths;
-      dataContext.active = di.recovered/di.deaths*1000000000;
+      dataContext.Emissions = di.Emissions;
+      dataContext.GDP = di.GDP;
+      dataContext.Population = di.Population;
+      dataContext.active = di.Emissions/di.Population*1000000000;
       valueAxis.min = undefined;
       valueAxis.max = undefined;
     }
@@ -1248,13 +1249,13 @@ am4core.ready(function() {
   function updateMapData(data) {
     //modifying instead of setting new data for a nice animation
     bubbleSeries.dataItems.each(function(dataItem) {
-      dataItem.dataContext.confirmed = 0;
-      dataItem.dataContext.deaths = 0;
-      dataItem.dataContext.recovered = 0;
+      dataItem.dataContext.GDP = 0;
+      dataItem.dataContext.Population = 0;
+      dataItem.dataContext.Emissions = 0;
       dataItem.dataContext.active = 0;
     })
 
-    maxPC = { active: 0, confirmed: 0, deaths: 0, recovered: 0 };
+    maxPC = { active: 0, GDP: 0, Population: 0, Emissions: 0 };
 
     for (var i = 0; i < data.length; i++) {
       var di = data[i];
@@ -1262,22 +1263,22 @@ am4core.ready(function() {
       var polygon = polygonSeries.getPolygonById(di.id);
 
       if (image) {
-        var population = Number(populations[image.dataItem.dataContext.id]);
+        var poppulation = Number(poppulations[image.dataItem.dataContext.id]);
 
-        image.dataItem.dataContext.confirmed = di.confirmed;
-        image.dataItem.dataContext.deaths = di.deaths;
-        image.dataItem.dataContext.recovered = di.recovered;
-        image.dataItem.dataContext.active = di.recovered/di.deaths*1000000;
+        image.dataItem.dataContext.GDP = di.GDP;
+        image.dataItem.dataContext.Population = di.Population;
+        image.dataItem.dataContext.Emissions = di.Emissions;
+        image.dataItem.dataContext.active = di.Emissions/di.Population*1000000;
       }
 
       if (polygon) {
-        polygon.dataItem.dataContext.confirmedPC = di.confirmed / population * 1000000;
-        polygon.dataItem.dataContext.deathsPC = di.deaths / population * 1000000;
-        polygon.dataItem.dataContext.recoveredPC = di.recovered / population * 1000000;
-        polygon.dataItem.dataContext.active = di.recovered/di.deaths*1000000;
-        polygon.dataItem.dataContext.activePC = polygon.dataItem.dataContext.active / population * 1000000;
+        polygon.dataItem.dataContext.confirmedPC = di.GDP / poppulation * 1000000;
+        polygon.dataItem.dataContext.deathsPC = di.Population / poppulation * 1000000;
+        polygon.dataItem.dataContext.recoveredPC = di.Emissions / poppulation * 1000000;
+        polygon.dataItem.dataContext.active = di.Emissions/di.Population*1000000;
+        polygon.dataItem.dataContext.activePC = polygon.dataItem.dataContext.active / poppulation * 1000000;
 
-        if (population > 100000) {
+        if (poppulation > 100000) {
           if (polygon.dataItem.dataContext.confirmedPC > maxPC.confirmed) {
             maxPC.confirmed = polygon.dataItem.dataContext.confirmedPC;
           }
@@ -1399,7 +1400,7 @@ am4core.ready(function() {
     }
   }
 
-  var populations = {
+  var poppulations = {
     "AD": "84000",
     "AE": "4975593",
     "AF": "29121286",
