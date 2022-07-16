@@ -6,9 +6,12 @@
 
 ## Objective: 
 Create a visualization that displays how Carbon emissions are affected by population and GDP over several years.
-Use this visualization to make informed decisions concerning:
+Use this visualization to make informed decisions. 
+
     - Does an increase in population lead to an increase in emissions?
+
     - Does an increase in population increase GDP?
+
     - Does an increase in GDP increase emissions?
 
 ## Sources: 
@@ -22,10 +25,8 @@ Global Carbon Emissions have been increasing since 1900. In the past 200 years, 
 ## Findings:
 Japan has a decrease in population beginning around 2010. 
 Drop in U.S. emissions around 2008 was caused by to the Great Recession where energy demand decreased.
-Based on the Time Magazine article, “emissions and economic growth have been decoupled, meaning the economy is still growing as emissions fall” for 32 developed and developing countries. Factors include:
-    - Efficient use of energy
-    - Low and zero-carbon sources of energy have become more affordable
-    - Governmental climate policies
+Based on the Time Magazine article, “emissions and economic growth have been decoupled, meaning the economy is still growing as emissions fall” for 32 developed and developing countries. Factors (Efficient use of energy, Low and zero-carbon sources of energy have become more affordable, Governmental climate policies)
+
 GDP per capita has a positive, yet weak, correlation with carbon emissions.
 Population has strong correlation with increase in carbon emissions.
 In the future, we would use total GDP to determine and add detailed sector emissions data.
