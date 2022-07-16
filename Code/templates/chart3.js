@@ -728,8 +728,8 @@ am4core.ready(function() {
 
 
   var seriesTypeSwitch = lineChart.legend.createChild(am4core.SwitchButton);
-  seriesTypeSwitch.leftLabel.text = "totals";
-  seriesTypeSwitch.rightLabel.text = "day change"
+  seriesTypeSwitch.leftLabel.text = "Line";
+  seriesTypeSwitch.rightLabel.text = "Bar"
   seriesTypeSwitch.leftLabel.fill = am4core.color("#ffffff");
   seriesTypeSwitch.rightLabel.fill = am4core.color("#ffffff");
 
@@ -973,7 +973,7 @@ am4core.ready(function() {
       currentTypeName += " kT of CO2";
     }
     else if (name == "GDP") {
-      currentTypeName += " US per capita";
+      currentTypeName += " USD per capita";
     }else {
       currentTypeName += " kg CO2 per capita";
     }
