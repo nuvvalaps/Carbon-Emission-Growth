@@ -1,6 +1,6 @@
 # Carbon Emissions Growth and the Correlation with GDP per Capita and Population
 
-### Project Link: https://nuvvalaps.github.io/Project3/
+### Project Link: https://nuvvalaps.github.io/Carbon-Emission-Growth/
 
 #### Group Members - Sanjay Dabra, Richard Kim, Kai Murata, Pranay Nuvvala
 
